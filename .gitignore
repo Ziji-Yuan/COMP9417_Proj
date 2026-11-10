@@ -79,6 +79,30 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# COMP9417 local data, caches, notebooks, and generated analysis outputs
+data/
+*.csv
+*.parquet
+*.feather
+*.ipynb
+outputs/
+results/
+artifacts/
+models/
+*.joblib
+*.pkl
+*.pickle
+*.onnx
+.DS_Store
+**/.DS_Store
+
+# Credentials and local secrets
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+
 # IPython
 profile_default/
 ipython_config.py
