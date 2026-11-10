@@ -1,4 +1,4 @@
-# Part I — Shared Day-Ahead Feature Engineering
+# Part A — Shared Day-Ahead Feature Engineering
 
 This package provides the reusable, leakage-free data and feature contract for
 the demand, price-direction, drift-analysis and chronological-backtesting work.
