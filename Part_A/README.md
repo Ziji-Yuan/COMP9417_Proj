@@ -32,7 +32,7 @@ weather fields are allowed because the official harness supplies them through
 ## Public API
 
 ```python
-from Part_I.features import (
+from Part_A.features import (
     FeatureConfig,
     get_data,
     get_features,
@@ -76,7 +76,7 @@ feature matrix.
 
 The default loader checks `data/nem_weather_halfhourly_2010_2026.csv`. Callers
 can instead pass an explicit CSV `path=` or a preloaded DataFrame through
-`data=`. Importing `Part_I` never requires the CSV.
+`data=`. Importing `Part_A` never requires the CSV.
 
 ### get_features
 
@@ -191,7 +191,7 @@ preprocessing, PCA or model-based selection.
 Portable tests require only NumPy and pandas:
 
 ```bash
-python -m unittest discover -s Part_I/tests -v
+python -m unittest discover -s Part_A/tests -v
 ```
 
 Synthetic tests cover market-day boundaries, lag 1/7, rolling calculations,
@@ -204,7 +204,7 @@ boundaries. Provide the project kit explicitly:
 
 ```bash
 COMP9417_KIT_ROOT=/path/to/comp9417_project_kit \
-python -m unittest discover -s Part_I/tests -v
+python -m unittest discover -s Part_A/tests -v
 ```
 
 Alternatively set `COMP9417_DATA_PATH` to the official CSV. If the harness or

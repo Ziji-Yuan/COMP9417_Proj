@@ -5,9 +5,9 @@ import unittest
 import numpy as np
 from pandas.testing import assert_frame_equal
 
-from Part_I.data import market_day
-from Part_I.features import FeatureConfig, get_features
-from Part_I.tests.helpers import synthetic_data
+from Part_A.data import market_day
+from Part_A.features import FeatureConfig, get_features
+from Part_A.tests.helpers import synthetic_data
 
 
 class LeakageTests(unittest.TestCase):

@@ -17,14 +17,14 @@ NSW electricity demand and next-day price direction under temporal drift.
 ## Repository layout
 
 ```text
-Part_I/                  Shared data and feature-engineering package
+Part_A/                  Shared data and feature-engineering package
 Part_B_Demand/           Demand work area
 Part_C_Price_Direction/  Price-direction work area
 Part_D_Drift/            Drift-analysis work area
 Part_E_Backtesting/      Backtesting work area
 ```
 
-See [Part I documentation](Part_I/README.md) for the data contract, feature
+See [Part A documentation](Part_A/README.md) for the data contract, feature
 dictionary, public APIs, leakage rules and tests.
 
 ## Quick start
@@ -38,7 +38,7 @@ The official dataset is intentionally not committed. Place a local copy at
 preloaded `data=` argument.
 
 ```python
-from Part_I.features import FeatureConfig, get_features
+from Part_A.features import FeatureConfig, get_features
 
 config = FeatureConfig(demand_lags=[1, 7, 14], rolling_windows=[7, 14])
 X, y, meta = get_features("2010-01-01", "2013-12-31", config)

@@ -4,8 +4,8 @@ import unittest
 
 from pandas.testing import assert_frame_equal
 
-from Part_I.features import FeatureConfig, get_features, get_inference_features
-from Part_I.tests.helpers import load_official_data, load_official_dayahead
+from Part_A.features import FeatureConfig, get_features, get_inference_features
+from Part_A.tests.helpers import load_official_data, load_official_dayahead
 
 
 class TrainingInferenceConsistencyTests(unittest.TestCase):

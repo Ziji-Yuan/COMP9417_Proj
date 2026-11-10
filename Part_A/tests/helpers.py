@@ -61,7 +61,7 @@ def load_official_dayahead():
 
 @lru_cache(maxsize=1)
 def load_official_data():
-    from Part_I.data import load_data
+    from Part_A.data import load_data
 
     configured = os.environ.get("COMP9417_DATA_PATH")
     root = _kit_root()

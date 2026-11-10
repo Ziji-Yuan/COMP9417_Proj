@@ -6,9 +6,9 @@ import numpy as np
 import pandas as pd
 from pandas.testing import assert_series_equal
 
-from Part_I.data import half_hour_slot, market_day
-from Part_I.features import FeatureConfig, get_data, get_features
-from Part_I.tests.helpers import synthetic_data
+from Part_A.data import half_hour_slot, market_day
+from Part_A.features import FeatureConfig, get_data, get_features
+from Part_A.tests.helpers import synthetic_data
 
 
 class FeatureCorrectnessTests(unittest.TestCase):
