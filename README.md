@@ -10,7 +10,9 @@ NSW electricity demand and next-day price direction under temporal drift.
 - **Part B — Demand:** NSW demand regression. Not yet published.
 - **Part C — Price Direction:** NSW price-direction classification. Not yet
   published.
-- **Part D — Drift:** clustering and drift analysis. Not yet published.
+- **Part D — Drift:** fixed day-type clustering, online input drift detection,
+  and reusable interfaces for E. See [Part D documentation](Part_D_Drift/README.md).
+  Final error/drift comparisons await predictions from B/C.
 - **Part E — Backtesting:** chronological evaluation and retraining strategies.
   Not yet published.
 

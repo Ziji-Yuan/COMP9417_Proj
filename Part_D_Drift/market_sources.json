@@ -1,0 +1,62 @@
+{
+  "purpose": "Retrospective interpretation only; never used in predictor features, cluster fitting, threshold calibration or alarm generation.",
+  "reviewed_on": "2026-11-11",
+  "events": [
+    {
+      "id": "five_minute_settlement",
+      "date": "2021-10-01",
+      "title": "Five-minute settlement begins",
+      "publisher": "AEMO",
+      "source_title": "Five Minute Settlement Archive",
+      "url": "https://www.aemo.com.au/initiatives/major-programs/past-major-programs/five-minute-settlement",
+      "supported_fact": "NEM dispatch and financial settlement were aligned at five-minute intervals from 1 October 2021.",
+      "hypothesis_to_check": "A market rule change may affect price distributions; examine price components around this date.",
+      "limitation": "The project CSV already aggregates prices to half-hours. Coincidence with this date does not establish an effect on NSW demand or explain an earlier persistent alarm episode."
+    },
+    {
+      "id": "nem_market_suspension",
+      "date": "2022-06-15",
+      "end_date": "2022-06-24",
+      "title": "NEM market suspension",
+      "publisher": "AEMO",
+      "source_title": "NEM market suspension and operational challenges in June 2022",
+      "source_date": "2022-11-14",
+      "url": "https://www.aemo.com.au/-/media/files/electricity/nem/market_notices_and_events/market_event_reports/2022/nem-market-suspension-and-operational-challenges-in-june-2022.pdf",
+      "locator": "Executive summary",
+      "supported_fact": "Market suspension began on 15 June 2022 and was formally lifted on 24 June. The incident report identifies concurrent supply, fuel-price and winter-demand pressures.",
+      "hypothesis_to_check": "Inspect the price and demand components during and around the suspension, allowing for the input monitor's one-day market lag and 28-day window.",
+      "limitation": "Several pressures occurred together. An existing exceedance before the suspension cannot be attributed to the suspension, and nearby cooldown alarms are not independent change points."
+    },
+    {
+      "id": "liddell_closure",
+      "date": "2023-04-28",
+      "title": "Liddell retirement",
+      "publisher": "AGL",
+      "source_title": "AGL's Liddell Power Station closes after 52 years of operation",
+      "source_date": "2023-04-28",
+      "url": "https://www.agl.com.au/about-agl/news-centre/2023/april/agls-liddell-power-station-closes-after-52-years-of-operation",
+      "supported_fact": "AGL announced Liddell's retirement in NSW on 28 April 2023.",
+      "hypothesis_to_check": "A supply-side retirement is a plausible context for examining price inputs around this date.",
+      "limitation": "The closure was announced well in advance and occurred in stages. The date does not identify an abrupt demand-shape change, and windows cannot establish causality."
+    }
+  ],
+  "long_term_context": [
+    {
+      "publisher": "AER",
+      "source_title": "State of the energy market 2025",
+      "url": "https://www.aer.gov.au/system/files/2025-08/State%20of%20the%20energy%20market%202025%20-%20Full%20report.pdf",
+      "locator": "National Electricity Market chapter, printed page 20",
+      "supported_fact": "The report relates midday negative prices to low-cost renewable generation and rooftop solar reducing net electricity demand.",
+      "hypothesis_to_check": "Compare the released NSW data's midday demand ratio and negative-price share over time.",
+      "limitation": "This is NEM-wide background, not NSW-specific causal identification. No solar-capacity or external generation data are imported, and no single event date is assigned to a gradual transition."
+    },
+    {
+      "publisher": "AER",
+      "source_title": "Wholesale markets quarterly - Q4 2024",
+      "source_date": "2025-01-30",
+      "url": "https://www.aer.gov.au/publications/reports/performance/wholesale-markets-quarterly-q4-2024",
+      "supported_fact": "AER reported quarterly records in rooftop solar output, negative-priced half-hours and minimum daily electricity demand.",
+      "limitation": "These broad observations supply context; they do not prove the cause of this project's input scores or a change in forecasting accuracy."
+    }
+  ]
+}
