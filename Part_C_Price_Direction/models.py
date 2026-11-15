@@ -15,7 +15,7 @@ def create_logistic_regression():
     model = Pipeline(
         [
             ("scaler", StandardScaler()),
-            ("classifier", LogisticRegression(max_iter=2000, random_state=42)),
+            ("classifier", LogisticRegression(C=100, max_iter=2000, random_state=8)),
         ]
     )
 
@@ -35,7 +35,7 @@ def create_random_forest():
         max_depth=None,
         min_samples_leaf=5,
         max_features="sqrt",
-        random_state=42,
+        random_state=8,
         n_jobs=-1,
     )
 
