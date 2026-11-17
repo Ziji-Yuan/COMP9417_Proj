@@ -7,11 +7,13 @@ NSW electricity demand and next-day price direction under temporal drift.
 
 - **Part A — Shared Feature Engineering:** common data alignment, targets,
   leakage-free features and training/inference consistency. Available now.
-- **Part B — Demand:** NSW demand regression. Not yet published.
+- **Part B — Demand:** NSW demand regression. See [Part B documentation](Part_B_Demand/README.md).
 - **Part C — Price Direction:** NSW price-direction classification. See [Part C Documentation](Part_C_Price_Direction/README.md)
 - **Part D — Drift:** fixed day-type clustering, online input drift detection,
   and reusable interfaces for E. See [Part D documentation](Part_D_Drift/README.md).
-  Final error/drift comparisons await predictions from B/C.
+  Frozen B/C error/drift comparisons and monthly confidence intervals are
+  available through `python -m Part_D_Drift.joint`; results go under
+  `outputs/part_d_complete/joint/`. Adaptation comparisons still depend on E.
 - **Part E — Backtesting:** chronological evaluation and retraining strategies.
   Not yet published.
 

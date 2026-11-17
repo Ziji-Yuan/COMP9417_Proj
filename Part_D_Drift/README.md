@@ -1,9 +1,11 @@
 # Part D — Day types and input drift
 
 This component consumes Part A's public interfaces. It implements fixed daily
-demand clustering, chronological input-only drift monitoring, and an optional
-retrospective join to predictions from B/C. It does not train their forecasting
-models or enforce E's retraining budget.
+demand clustering, chronological input-only drift monitoring, and retrospective
+joint analysis of B/C's four frozen forecasting models. A handover utility
+reconstructs B's missing Ridge artifact using B's existing configuration and
+2010–2014 data. D does not select new forecasting configurations or enforce
+E's retraining budget.
 
 ## Run from the repository root
 
@@ -24,6 +26,8 @@ python -m Part_D_Drift.run \
 Pass the actual CSV location if the kit is elsewhere. Do not copy or commit the
 dataset. Use a new output directory for each run; the CLI refuses nonempty
 directories to prevent stale tables from being mistaken for current results.
+If `outputs/part_d_complete` already exists, keep that fixed reference and run
+the joint command below; there is no need to regenerate the independent D run.
 The CLI limits numerical-library threads to two. On machines where joblib
 cannot inspect physical cores, `LOKY_MAX_CPU_COUNT=2` avoids its discovery warning.
 
@@ -38,14 +42,19 @@ default is `daily-mean`. Both choices use only training years for PCA and k.
 | `profiles.py` | Exact 48-slot profiles, frozen PCA/K-means, novelty distances, cluster shares |
 | `drift.py` | Input summaries, reference/calibration fitting, online detector and replay |
 | `analysis.py` | Validate B/C predictions; relate errors to types and drift retrospectively |
+| `handover.py` | Export B's frozen Ridge/RF forecasts and the two official baselines for each task |
+| `evaluation.py` | Appendix A intervals, pooled metrics, calendar checks and alarm/error comparisons |
+| `joint.py` | Join B/C against existing D outputs without refitting the D reference |
+| `joint_plots.py` | Six additional figures for frozen forecasting performance and drift associations |
 | `diagnostics.py` | Training-only robustness, pre-2015 detector sensitivity, episodes and descriptive comparisons |
 | `market_sources.json` | Primary-source event dates and interpretation limits, used after monitoring only |
 | `plots.py` | Export standalone PNG and vector PDF figures with labelled axes and units |
 | `run.py` | Reproducible command, tables, figures, artifacts and run metadata |
 | `tests/` | Time-boundary, leakage, persistence, restart and metric checks |
 
-Only `Part_A` is imported from another team component. There is no dependency on
-unpublished B/C/E modules. A's existing implementation is unchanged.
+Only `Part_A` is imported from another team component. The joint runner also
+reads B's saved RF and C's published prediction CSV. B/C's source and existing
+model files remain unchanged; E is not needed to run this frozen analysis.
 
 ## Fixed day-type analysis
 
@@ -219,30 +228,116 @@ timestamp,task,model,strategy,y_true,y_pred
 - Supply dates in the 2015–October 2026 simulation. Different models can have
   different coverage, but comparisons need matching periods to be meaningful.
 
+## Complete frozen B/C joint analysis
+
+From the repository root, with the fixed independent D output already present:
+
 ```bash
-python -m Part_D_Drift.run \
+git lfs pull  # B's RF must be the actual artifact, not an LFS pointer
+python -m Part_D_Drift.joint \
   --data ../comp9417_project_kit/data/nem_weather_halfhourly_2010_2026.csv \
-  --predictions results/demand_predictions.csv \
-  --predictions results/price_predictions.csv \
-  --output outputs/part_d_with_predictions \
+  --reference-output outputs/part_d_complete \
+  --price-predictions Part_C_Price_Direction/results/price_predictions_for_part_d.csv \
+  --demand-rf Part_B_Demand/artifacts/rf_model.joblib \
   --strict-versions
 ```
 
-Prediction truth is checked against A's targets. Duplicate/incomplete days,
-invalid price labels and out-of-period observations fail explicitly. Outputs
-include daily and monthly metrics, errors by observed cluster, and descriptive
-monthly Spearman associations with type shares, novelty, profile distance and
-input score. Monthly context uses each model's actual prediction-day coverage,
-so a partial month is not compared with full-month type shares by accident.
-Balanced accuracy is computed across the period's actual half-hours, not by
-averaging daily balanced accuracies. Monthly association estimates have no
-causal interpretation and can be confounded by seasonality and common trends.
-No detector parameter is changed based on these analysis results.
+The default destination is **`outputs/part_d_complete/joint/`**. It must be
+empty or absent. This is a subdirectory of the one current D result directory,
+not a replacement reference fit. The runner verifies the source CSV hash and
+hashes of the existing D assignments, detector signals, fitted objects and
+event catalogue before/after analysis. It never refits them or changes alarms.
 
-Without B/C prediction files, this stage is explicitly marked
-`pending_B_C_predictions`; no model-performance numbers are fabricated.
-Monthly confidence intervals and complete forecasting backtests remain with
-A/E as agreed in the team split.
+The four frozen series are:
+
+- Demand `random_forest`: B's saved RF, loaded once, with its published
+  parameters, feature schema and training-row count checked. Tree artifacts
+  do not retain training dates; B's training source supplies that provenance.
+- Demand `ridge_regression`: reconstruct `StandardScaler` + `Ridge(alpha=1000)`
+  from `Part_B_Demand/train_demand.py`. Fit only the 87,312 available feature
+  rows from 2010-01-08 through 2014-12-31, then freeze throughout simulation.
+  The first seven days lack required lags. This rebuild does not repeat model
+  selection using the simulation period.
+- Price `logistic_regression` and `random_forest`: read C's exported hard-label
+  forecasts. Both are retained even if their historical ranking differs from
+  the 2014 validation ranking; D does not reselect C's final model.
+
+Both yesterday and last-week official baselines are generated for each task.
+For **both price baselines**, the threshold is yesterday's actual mean price;
+the last-week baseline does not use last week's mean as the threshold.
+B's forecasts are emitted in chronological daily order. Four representative
+days check that A's bulk causal features exactly equal its day-ahead inference
+interface using only past market history and permitted target-day weather.
+
+Every series must cover **2015-01-01 through 2026-10-31: 4,322 complete market
+days, or 207,456 half-hours**. All supplied targets are checked against A's
+official targets. Missing/duplicate intervals, invalid price labels, wrong
+targets and incomplete simulation coverage fail explicitly. The generic
+`analysis.py` interface still supports partial coverage, while this complete
+joint runner requires identical full-period coverage for all eight series.
+
+### Metrics and uncertainty
+
+`overall_performance`, `yearly_performance`, `monthly_performance` and
+`daily_performance` provide demand MAPE/MAE and price Accuracy/BalancedAccuracy.
+Balanced accuracy pools actual half-hours within each period; it is not the
+mean of daily balanced accuracies. Type/novelty tables also include counts and
+price class proportions to expose composition differences.
+
+`monthly_confidence_intervals.csv` implements **both Appendix A methods** for
+each model and baseline in all 142 months:
+
+1. Independent half-hours: MAPE uses mean APE ± 1.96 sample standard deviation
+   / sqrt(n); Accuracy uses the normal binomial interval. Price Hoeffding
+   bounds are additionally exported. Analytic bounds are stored untruncated.
+2. Whole-day bootstrap: resample complete 48-interval days with replacement,
+   using **2,000 replicates** and the 2.5th/97.5th percentiles. For these mean
+   metrics, resampling day means is exactly equivalent to concatenating all
+   intervals of the sampled complete days. Stable per-series/month seeds make
+   results independent of row/group traversal order.
+
+The estimand is expected performance of the fixed model under conditions
+resembling that observed month, assuming within-month stability. The realized
+month's score is known exactly. These are not live-week prediction intervals
+or formal tests that two months differ. Day resampling preserves within-day
+dependence but assumes independent, exchangeable days; cross-day dependence
+can still invalidate that approximation. `confidence_interval_widths.csv`
+compares the two widths without presuming the day interval is always wider.
+
+### Type/error and alarm/error evidence
+
+- Pooled error tables split by observed type and novelty, plus year-by-type
+  and year-by-novelty tables. These are retrospective attributes available
+  after the target day; they never enter that day's forecasts.
+- `calendar_checked_associations.csv` compares monthly loss with novelty
+  share, profile distance, input score and Type 0 share. It reports raw
+  Spearman coefficients, correlations of ranks after regressing out year and
+  calendar-month fixed effects, and Spearman coefficients of consecutive
+  monthly changes. Positive always means **higher loss**: demand MAPE or price
+  misclassification percentage. This differs from the old
+  `descriptive_associations.csv`, which uses price Accuracy and thus the
+  opposite sign. The checks do not eliminate all confounding or establish
+  causation; no iid correlation p-values are presented.
+- `within_month_novelty.csv` compares novel and ordinary days inside the same
+  month. Its summary weights eligible months equally and requires at least
+  two days of each kind. Both raw loss gaps and gaps in excess loss relative
+  to the same day's yesterday baseline are exported.
+- `alarm_performance_windows.csv` compares the 28 days ending on alarm day D
+  with D+1 through D+28. Only complete windows enter its summary. Forecasts
+  remain frozen in both windows. First alarms and repeat cooldown alarms
+  within the same exceedance run are reported separately. A positive change
+  is an observed deterioration, **not** a detector true positive. Baseline-
+  relative changes help distinguish model-specific deterioration from days
+  that are also harder for the simple baseline.
+- `market_event_performance.csv` adds model-error windows around the sourced
+  events, with matching previous-year windows. These are contextual
+  comparisons, not causal controls. Future outcomes are used only for this
+  retrospective analysis, never to change past alarms or fitted parameters.
+
+The legacy `run --predictions ...` option performs only the basic join and
+metrics. Use `joint` for the complete frozen analysis, confidence intervals and
+calendar/window checks. E's error-based monitor, retraining comparisons and
+live-week strategy recommendation remain separate team work.
 
 ## Outputs and review
 
@@ -273,6 +368,16 @@ spec p. 6 and must contain the fitted objects actually needed by `Forecaster`.
   environment versions, threshold, distinct exceedance-run count, repeated
   alarms and pending handoffs.
 - `market_sources.json`: a copy of the interpretation-only source catalogue.
+- `joint/predictions/`: B's two half-hour forecast series and the four baseline
+  series as gzip CSVs. C's existing CSV is read in place, without duplication.
+- `joint/artifacts/demand_ridge_rebuilt.joblib`: B's reconstructed frozen Ridge.
+  This is a local reproducibility artifact; final submission packaging belongs
+  to A/E and must follow the submission's size/interface requirements.
+- `joint/tables/`: complete frozen metrics, Appendix A intervals, calendar,
+  novelty, alarm-window and market-event error comparisons.
+- `joint/figures/`: six new evidence figures, each in PNG and PDF formats.
+- `joint/demand_handover.json` and `joint/run_summary.json`: model/data/source
+  hashes, fit periods, feature checks, coverage, uncertainty settings and limits.
 
 ### Detector checks and interpretation
 
@@ -339,14 +444,27 @@ No network call or external numerical dataset is used by this component.
 | pp. 4–5: relate types to input detection | Correctly lagged daily/monthly context and figure 12 |
 | p. 5: online input detector, past-only threshold, alarm dates, D+1 timing | `drift.py`, calibration/holdout tables, dated signals, streaming and leakage tests |
 | p. 5: plausible market events; distinguish evidence from coincidence | Sourced catalogue, event windows, episode/attribution tables and explicit limits |
-| pp. 4–5: compare types/alarms with forecasting errors | **Pending B/C predictions**; validated join and metrics interface exists |
+| pp. 4–5: compare types/alarms with forecasting errors | **Complete for all four frozen B/C models**; full coverage, pooled/calendar-controlled comparisons, alarm windows |
 | p. 5: error-based detector, retraining strategies, six-retrain budget | **Part E**; D supplies reusable input signals and serialized detector |
-| p. 5: monthly model-error 95% intervals by both methods | **A/E**, with B/C predictions; D's optional performance plot is not a replacement |
+| p. 5 and Appendix A: monthly model-error 95% intervals by both methods | **Complete for frozen B/C + both baselines** in `joint`; E must add corresponding evidence for adaptation strategies |
 | p. 10: group-authored report | Figures/tables and implementation documentation are provided; group members write the report |
 
-For a quick review, inspect figures 01/02/03, then 08/10/11/12/13 and the alarm
-episode table. No evidence here establishes whether drift-triggered retraining
-improves prediction: that requires B/C outputs and E's budgeted backtest.
+For independent D evidence, inspect figures 01/02/03, then 08/10/11/12/13 and
+the alarm episode table. For the completed joint analysis:
+
+| Figure in `joint/figures/` | Question it supports | Report use |
+| --- | --- | --- |
+| 07: frozen monthly performance and both CIs | How performance and uncertainty vary over time, against both baselines | Main frozen-model evidence; coordinate with B/C/E to avoid duplication |
+| 14: pooled errors by type and novelty | Which observed groups have higher error? | Descriptive support; pair with calendar checks and group counts |
+| 15: input drift aligned with errors | Do input shifts, novelty and performance move together over time? | Main D joint-analysis candidate |
+| 16: errors before/after alarms | Are alarms consistently followed by worse frozen performance? | Supports limitations; use first/repeat counts from the accompanying table |
+| 17: raw and calendar-checked associations | Does an apparent relationship survive simple time-trend checks? | Main interpretation check; positive means more error |
+| 18: sourced market-event error windows | What happens to errors near selected historical events? | Context if space allows; no causal attribution |
+
+Do not include all figures automatically: the main report has a page limit.
+Select evidence covering the required questions and write your own explanation.
+No evidence here establishes whether drift-triggered **retraining** improves
+prediction: that requires E's budgeted adaptation experiments.
 
 These generated directories are ignored by the repository's existing
 `.gitignore`. Commit source and documentation; coordinate separately how to
@@ -366,6 +484,10 @@ Tests cover midnight alignment, incomplete/off-grid data, future perturbations,
 training/inference consistency, frozen learned state, stream/replay equality,
 serialization midstream, alarm persistence/cooldown, next-day activation,
 external target verification, and monthly balanced-accuracy aggregation.
+The joint tests also cover the Appendix A formulas, complete-day bootstrap,
+deterministic seeds, midnight-to-month boundaries, reconstruction without future
+training rows, official baseline thresholds, calendar-confounding examples,
+and exact pre/post alarm and event windows.
 
 ## Method references
 
