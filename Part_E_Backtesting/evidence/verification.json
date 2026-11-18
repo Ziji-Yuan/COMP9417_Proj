@@ -1,0 +1,80 @@
+{
+  "status": "passed",
+  "series": [
+    {
+      "task": "demand",
+      "strategy": "error_triggered",
+      "days": 4322,
+      "predictions": 207456,
+      "retrains": 6,
+      "targets_match_independent_handover": true,
+      "model_activation_and_training_cutoff_valid": true
+    },
+    {
+      "task": "demand",
+      "strategy": "frozen",
+      "days": 4322,
+      "predictions": 207456,
+      "retrains": 0,
+      "targets_match_independent_handover": true,
+      "model_activation_and_training_cutoff_valid": true
+    },
+    {
+      "task": "demand",
+      "strategy": "input_triggered",
+      "days": 4322,
+      "predictions": 207456,
+      "retrains": 6,
+      "targets_match_independent_handover": true,
+      "model_activation_and_training_cutoff_valid": true
+    },
+    {
+      "task": "demand",
+      "strategy": "periodic",
+      "days": 4322,
+      "predictions": 207456,
+      "retrains": 6,
+      "targets_match_independent_handover": true,
+      "model_activation_and_training_cutoff_valid": true
+    },
+    {
+      "task": "price",
+      "strategy": "error_triggered",
+      "days": 4322,
+      "predictions": 207456,
+      "retrains": 6,
+      "targets_match_independent_handover": true,
+      "model_activation_and_training_cutoff_valid": true
+    },
+    {
+      "task": "price",
+      "strategy": "frozen",
+      "days": 4322,
+      "predictions": 207456,
+      "retrains": 0,
+      "targets_match_independent_handover": true,
+      "model_activation_and_training_cutoff_valid": true
+    },
+    {
+      "task": "price",
+      "strategy": "input_triggered",
+      "days": 4322,
+      "predictions": 207456,
+      "retrains": 6,
+      "targets_match_independent_handover": true,
+      "model_activation_and_training_cutoff_valid": true
+    },
+    {
+      "task": "price",
+      "strategy": "periodic",
+      "days": 4322,
+      "predictions": 207456,
+      "retrains": 6,
+      "targets_match_independent_handover": true,
+      "model_activation_and_training_cutoff_valid": true
+    }
+  ],
+  "monthly_ci_rows": 1704,
+  "cross_reference": "outputs/part_d_complete",
+  "note": "Demand forest comparisons tolerate1e-9MW floating reduction rounding; classification checked exactly"
+}

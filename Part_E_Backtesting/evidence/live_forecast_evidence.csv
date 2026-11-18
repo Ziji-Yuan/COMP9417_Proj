@@ -1,0 +1,3 @@
+task,metric,units,forecast_point_mean_of_six_same_date_weeks,recent_three_year_sensitivity_mean,historical_scenario_p025,historical_scenario_p975,historical_scenario_min,historical_scenario_max,n_exact_weeks,n_scenario_weeks,n_source_years
+demand,MAPE,percent,4.895587847920621,5.720595709964172,2.6111082973258717,6.589079720213307,2.268831100804113,6.895661713946032,6,30,6
+price,BalancedAccuracy,percent,75.772704693522,82.14720889435695,63.23691589662685,90.0767543859649,62.38825031928481,91.66666666666666,6,30,6

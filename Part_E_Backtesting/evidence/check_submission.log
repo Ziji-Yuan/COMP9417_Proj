@@ -1,0 +1,26 @@
+Package found at /var/folders/g7/65h31yp57h39hf7fw1f5rydh0000gn/T/c9417check_9f2ek0gy/pkg
+
+2026-10-18  ok    init   2.8s  predict   0.2s
+2026-10-19  ok    init   2.8s  predict   0.2s
+2026-10-20  ok    init   2.9s  predict   0.2s
+2026-10-21  ok    init   2.9s  predict   0.2s
+2026-10-22  ok    init   2.9s  predict   0.2s
+2026-10-23  ok    init   2.9s  predict   0.2s
+2026-10-24  ok    init   2.9s  predict   0.2s
+2026-10-25  ok    init   3.0s  predict   0.2s
+2026-10-26  ok    init   3.0s  predict   0.2s
+2026-10-27  ok    init   3.0s  predict   0.2s
+2026-10-28  ok    init   3.0s  predict   0.2s
+2026-10-29  ok    init   3.0s  predict   0.2s
+2026-10-30  ok    init   3.1s  predict   0.2s
+2026-10-31  ok    init   3.1s  predict   0.2s
+
+Scores:
+(in-sample if your models were trained on these days: they check that the package
+ runs, not how it will perform in the live week)
+                              MAPE %   MAE MW  BalAcc %   Acc %
+Your package                    1.25     79.3      97.2    97.2
+Same half-hour yesterday        7.12    415.3      78.0    78.1
+Same half-hour last week        9.95    556.2      73.2    73.5
+
+All days ran successfully.

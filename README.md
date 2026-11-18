@@ -13,9 +13,13 @@ NSW electricity demand and next-day price direction under temporal drift.
   and reusable interfaces for E. See [Part D documentation](Part_D_Drift/README.md).
   Frozen B/C error/drift comparisons and monthly confidence intervals are
   available through `python -m Part_D_Drift.joint`; results go under
-  `outputs/part_d_complete/joint/`. Adaptation comparisons still depend on E.
+  `outputs/part_d_complete/joint/`. Adaptation comparisons are available in E.
 - **Part E — Backtesting:** chronological evaluation and retraining strategies.
-  Not yet published.
+  Full 2015–October 2026 comparisons, error monitoring, final candidate and
+  live-week forecast evidence are implemented. See [Part E documentation](Part_E_Backtesting/README.md),
+  [reviewable results](Part_E_Backtesting/evidence/README.md) and
+  [integration handover](Part_E_Backtesting/HANDOVER.md). Linux verification
+  and the group-authored report remain.
 
 ## Repository layout
 

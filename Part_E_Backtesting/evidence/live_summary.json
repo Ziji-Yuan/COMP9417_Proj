@@ -1,0 +1,66 @@
+{
+  "forecast_week": [
+    "2026-12-07",
+    "2026-12-13"
+  ],
+  "analogs": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "environment": {
+    "python": "3.11.18",
+    "libraries": {
+      "numpy": "2.4.6",
+      "pandas": "3.1.0",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "joblib": "1.6.0"
+    }
+  },
+  "data_sha256": "c13711002906140eaf7cc67c1ce17a49facd359cf3d1a84722aaa3ccd647752c",
+  "fits_per_task": 6,
+  "point_rule": "Unweighted mean of six same-date analog week scores",
+  "interval_rule": "Empirical2.5/97.5percentiles of30 nearby7day scenario scores; not a formal95percent prediction interval",
+  "limitations": [
+    "Only six source years; adjacent weeks and overlapping training sets are dependent",
+    "Historical simulation informed final strategy selection; these are retrospective post-selection diagnostics",
+    "Nearby weeks include different weather, price regimes and forecast horizons",
+    "Target-day weather is idealized reanalysis, as permitted by task",
+    "Unseen2026 changes/extremes can put actual live-week results outside this scenario range",
+    "Do not interpret these ranges as monthly-mean confidence intervals or guaranteed coverage"
+  ],
+  "forecasts": [
+    {
+      "task": "demand",
+      "metric": "MAPE",
+      "units": "percent",
+      "forecast_point_mean_of_six_same_date_weeks": 4.895587847920621,
+      "recent_three_year_sensitivity_mean": 5.720595709964172,
+      "historical_scenario_p025": 2.6111082973258717,
+      "historical_scenario_p975": 6.589079720213307,
+      "historical_scenario_min": 2.268831100804113,
+      "historical_scenario_max": 6.895661713946032,
+      "n_exact_weeks": 6,
+      "n_scenario_weeks": 30,
+      "n_source_years": 6
+    },
+    {
+      "task": "price",
+      "metric": "BalancedAccuracy",
+      "units": "percent",
+      "forecast_point_mean_of_six_same_date_weeks": 75.772704693522,
+      "recent_three_year_sensitivity_mean": 82.14720889435695,
+      "historical_scenario_p025": 63.23691589662685,
+      "historical_scenario_p975": 90.0767543859649,
+      "historical_scenario_min": 62.38825031928481,
+      "historical_scenario_max": 91.66666666666666,
+      "n_exact_weeks": 6,
+      "n_scenario_weeks": 30,
+      "n_source_years": 6
+    }
+  ]
+}

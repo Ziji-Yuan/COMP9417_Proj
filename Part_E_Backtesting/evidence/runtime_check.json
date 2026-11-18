@@ -1,0 +1,11 @@
+{
+  "platform": "darwin",
+  "peak_rss_mib": 754.515625,
+  "init_seconds": 2.6799449170939624,
+  "predict_seconds": 0.1518884589895606,
+  "rows": 48,
+  "index_matches": true,
+  "linux_sandbox_tested": false,
+  "official_local_check_days": 14,
+  "official_local_failures": 0
+}

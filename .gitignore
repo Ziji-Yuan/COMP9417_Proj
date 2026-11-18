@@ -229,6 +229,10 @@ cython_debug/
 # Temporary file for partial code execution
 tempCodeRunnerFile.py
 
+# Small, deliberately published Part E evidence tables (no raw dataset/models).
+!Part_E_Backtesting/evidence/*.csv
+!Part_E_Backtesting/evidence/check_submission.log
+
 # Ruff stuff:
 .ruff_cache/
 

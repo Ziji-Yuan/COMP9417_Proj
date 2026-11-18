@@ -1,9 +1,12 @@
 # Part E — Backtesting and adaptation
 
-Work in progress. Implemented: boundary integration checks, online error
-monitoring, deployment-budget control, out-of-sample threshold calibration and
-the daily forecasting/retraining runner. A January 2015 pilot has exercised real
-retraining for both tasks. Full-period comparisons and interpretation are next.
+Implemented: online error monitoring, deployment-budget control, out-of-sample
+threshold calibration and the full 2015–October 2026 forecasting/retraining
+comparison. Eight model/strategy series passed independent verification, with
+1704 monthly confidence-interval rows. Final candidate, reproducibility checks
+and live-week evidence are complete locally. Linux verification and group-authored
+report interpretation remain. See [results and figures](evidence/README.md) and
+[integration handover](HANDOVER.md).
 
 Run from the repository root, in Python 3.11 with the official kit pins:
 
