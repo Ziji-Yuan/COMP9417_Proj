@@ -100,5 +100,7 @@ There is no automatic upload. Keep the report and experiment-code ZIP separate.
    79.138% vs README79.50%; the full frozen predictions match C's export exactly.
 5. Check Moodle updates, final submission files and individual peer reviews.
 
-Generated results/artifacts are ignored by Git. Share them separately from the
-source commit; a source pull alone does not transfer the final ZIP or results.
+Full generated results/artifacts remain ignored by Git. Selected summary tables,
+figures and verification logs are published in[evidence/](evidence/README.md).
+A source pull transfers those selected files, but not the final candidate ZIP,
+trained weights or full interval-level prediction dumps; share those separately.
