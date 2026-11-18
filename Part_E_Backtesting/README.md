@@ -14,6 +14,9 @@ python -m unittest discover -s Part_E_Backtesting/tests -t . -v
 python -m Part_E_Backtesting.run --data /path/to/nem_weather_halfhourly_2010_2026.csv --end 2015-01-31 --output outputs/new_pilot
 python -m Part_E_Backtesting.run --data /path/to/nem_weather_halfhourly_2010_2026.csv
 python -m Part_E_Backtesting.plots --results outputs/part_e_full
+python -m Part_E_Backtesting.build_final --data /path/to/nem_weather_halfhourly_2010_2026.csv
+python -m Part_E_Backtesting.live_forecast --data /path/to/nem_weather_halfhourly_2010_2026.csv
+python -m Part_E_Backtesting.plot_live_forecast
 ```
 
 Outputs default to ignored `outputs/part_e_smoke/` and
