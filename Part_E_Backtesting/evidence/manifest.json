@@ -1,0 +1,121 @@
+{
+  "purpose": "selected evidence for private team review; not report prose",
+  "files": {
+    "overall_performance.csv": {
+      "sha256": "a07b590b0eb5a08f9243af6c2c319de0f02e7861e95f77177045b9d0d2cee581",
+      "bytes": 1555
+    },
+    "yearly_performance.csv": {
+      "sha256": "24d2d0dfdaf0f796b421ac1a9ad4d9f716f56eaaf99ae16636e9dc2180063046",
+      "bytes": 17866
+    },
+    "monthly_performance.csv": {
+      "sha256": "845bf227eb1dbcb6dbcad33fb787caf1e7c302557bd128b0752cac1bc77484f6",
+      "bytes": 210681
+    },
+    "monthly_confidence_intervals.csv": {
+      "sha256": "796e9e48c4dc6ae87c9534b51a4803a59038e5ed8f0e7ac863e1721653be216b",
+      "bytes": 418279
+    },
+    "strategy_cost_comparison.csv": {
+      "sha256": "bd7171e5cc049a206c90aa3274121c391b48dbc6a0b9e25531433f918f365953",
+      "bytes": 1641
+    },
+    "verification.json": {
+      "sha256": "2422454a4577c40d12b05df7253a61d112dd38161039a27906b56fc9f1934c06",
+      "bytes": 2204
+    },
+    "figures/04_budget_performance.pdf": {
+      "sha256": "1d2e35bde189140a083a2ba64a5dcda98f0f359e98d0e6be573f6b45e8cc1b88",
+      "bytes": 17937
+    },
+    "figures/04_budget_performance.png": {
+      "sha256": "2d9cb74d10ddfaefb6b12acff178eead2a9d7a7d8e56997b220f3be1d9db9ba5",
+      "bytes": 65940
+    },
+    "figures/05_interval_widths.pdf": {
+      "sha256": "90998a2f03758fb2eb85cfd010415d96bd757606632697f2b53d4e0e7bc5ace8",
+      "bytes": 38888
+    },
+    "figures/05_interval_widths.png": {
+      "sha256": "73057d3019567288edfbfc9f0b81acf65afdc2470224e9113027f47eeba988af",
+      "bytes": 153754
+    },
+    "figures/02_price_balanced_accuracy.png": {
+      "sha256": "cc3a4b6c8a080679aea13c5974fecb5c870bb3ca1ebf29855b455310c0a589c4",
+      "bytes": 327208
+    },
+    "figures/02_price_balanced_accuracy.pdf": {
+      "sha256": "2ee98d954420ad43b7414d8c44d0666b800f063cc619c431826cd88002a76160",
+      "bytes": 25628
+    },
+    "figures/06_detector_statistics.png": {
+      "sha256": "18547f184aebb2bc93755b99e258d3f8abe5570fc5cb67a01989391d515bdeaf",
+      "bytes": 417881
+    },
+    "figures/03_retraining_dates.pdf": {
+      "sha256": "41158deb7d848dad0db2eb3fd0e63a1fd9cab7eb773bc6e7910512366b659dbe",
+      "bytes": 18862
+    },
+    "figures/03_retraining_dates.png": {
+      "sha256": "021fbcdb05e0152d25733fc03376bc365226f5d97563d32b228c9b9c29700e68",
+      "bytes": 69589
+    },
+    "figures/06_detector_statistics.pdf": {
+      "sha256": "14f861b1145bd8a9477ec98779c3b89b3578eb856314049f1df7539a63768ab9",
+      "bytes": 158952
+    },
+    "figures/01_monthly_performance.pdf": {
+      "sha256": "f8027d5b76bcaa7b050b6d37e91050e44205653d976f7a8ece0627f3a502fa7c",
+      "bytes": 49344
+    },
+    "figures/01_monthly_performance.png": {
+      "sha256": "3eadf97116c67a526ec22a802854502706c2393bf191a98ba2626c1bf92f2936",
+      "bytes": 843489
+    },
+    "live_forecast_evidence.csv": {
+      "sha256": "97124c8d27db67c4e6f244b7dde60421949ec6e3ed40871ae7c5e25d067a9b10",
+      "bytes": 519
+    },
+    "live_same_date_week_metrics.csv": {
+      "sha256": "b4762de6bc276048688cde104417f8a4f8a9794d08112829d2d5d5c67c709072",
+      "bytes": 4458
+    },
+    "live_nearby_week_scenarios.csv": {
+      "sha256": "c905a295a01ad44ec37e4c1770c892a62d6824ecc42f16cf377a8dabd6688e0f",
+      "bytes": 26187
+    },
+    "live_summary.json": {
+      "sha256": "b01dd06e1dedc42e7d10de4e34e034e1057bdea2ff49fc6bb21be6aeb9a16105",
+      "bytes": 2281
+    },
+    "live_training_log.csv": {
+      "sha256": "7d914d6116f0eb1a995cd59528bf056d6ea2593f2a5c9499663018d539e6450a",
+      "bytes": 759
+    },
+    "live_forecast_evidence.png": {
+      "sha256": "3c43ce9bba264ef54fd9ae68b7b463e2dfb29dc27b854d277e2450a9e4c7cfb0",
+      "bytes": 115543
+    },
+    "live_forecast_evidence.pdf": {
+      "sha256": "c899b54c8b12fa8427b4ad75658289d2cd12dae8f858bb7de921484b71c0a8a0",
+      "bytes": 26047
+    },
+    "runtime_check.json": {
+      "sha256": "fe3283ffcd05455595a31394bcfb4921f755fe46b41611fb735be7b203f00682",
+      "bytes": 275
+    },
+    "reproducibility_check.json": {
+      "sha256": "601087965a66c1fd5bd9b7a95ca45e9f3532c6bbbf57c3ce2b04bd458f74d9eb",
+      "bytes": 275
+    },
+    "check_submission.log": {
+      "sha256": "1b13fa659596f6044095477930703447d1d1a071773a6a6dcaccae209db2dd82",
+      "bytes": 1159
+    },
+    "package_manifest.json": {
+      "sha256": "75286327bfef18a241258cef7a2fc0dfdce55e48b55c07877250632afc724c87",
+      "bytes": 722
+    }
+  }
+}

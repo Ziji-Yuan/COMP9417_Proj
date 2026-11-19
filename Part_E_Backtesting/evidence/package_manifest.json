@@ -1,0 +1,13 @@
+{
+  "candidate_only": true,
+  "files_sha256": {
+    "model.py": "cacbe4bcb91e2855bb6a48709635759259d4656035e01d9d98936de57afe8cda",
+    "train.py": "5cfcd28c213c8c777c278c52b634754f33deb1f3a68c57600ccfb88b1c140615",
+    "Part_A/__init__.py": "f9f1b755d81256b407f58dfd6d3031194f00e40dd9d0058a0efb31abefd7e252",
+    "Part_A/features.py": "d52eda3076fcdcd9f6505badf8e1b7bb7791682a1abbd1a171a06180b7bcb342",
+    "Part_A/data.py": "fa72d370b606b73e8b5d8cad25cfcf78e8ec2d9d337130e522a30ac03a2c9ddc",
+    "artifacts/metadata.json": "8321c000701bc07302d6c7cfe7ec86a7e80c04220eb95386e11dc753b8d1da69",
+    "artifacts/models.joblib": "de3f40a407a1a6e88a61899f040f8d6fa3eb66627ef53645059e23fdab6ae8cf"
+  },
+  "zip_bytes": 48776339
+}
