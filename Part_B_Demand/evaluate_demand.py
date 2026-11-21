@@ -3,6 +3,7 @@ import sys
 from pathlib import Path
 import pandas as pd
 import numpy as np
+import joblib
 
 from Part_A.features import get_data, get_inference_features
 from Part_B_Demand.predict_demand import predict_demand
@@ -21,6 +22,8 @@ print("Evaluation imports successful!")
 
 # Load the electricity dataset
 df = get_data()
+ridge_path = Path(__file__).resolve().parent / "artifacts" / "ridge_model.joblib"
+ridge_model = joblib.load(ridge_path)
 
 # Choose the first evaluation day
 target_day = "2015-01-01"
@@ -242,4 +245,37 @@ results_df.to_csv(
 
 print("Daily evaluation results saved successfully!")
 
+print("\n--- Ridge Regression vs Baselines (2025) ---")
 
+ridge_results = []
+
+for day in pd.date_range("2025-01-01", "2025-12-31"):
+    day_str = day.strftime("%Y-%m-%d")
+
+    history, weather_next = make_inputs(df, day_str)
+
+    if len(weather_next) != 48:
+        continue
+
+    X_next = get_inference_features(history, weather_next)
+
+    if not np.isfinite(X_next.to_numpy(dtype=float)).all():
+        continue
+
+    actual = targets(df, day_str)["nsw_demand_mw"]
+
+    if len(actual) != 48 or actual.isna().any():
+        continue
+
+    ridge_pred = ridge_model.predict(X_next)
+
+    ridge_results.append({
+        "MAE": mae(actual, ridge_pred),
+        "MAPE": mape(actual, ridge_pred)
+    })
+
+ridge_results_df = pd.DataFrame(ridge_results)
+
+print(f"Evaluated days: {len(ridge_results_df)}")
+print(f"Ridge MAE: {ridge_results_df['MAE'].mean():.2f} MW")
+print(f"Ridge MAPE: {ridge_results_df['MAPE'].mean():.2f}%")
